@@ -59,6 +59,10 @@ router.post(
       // Encrpt password
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
+
+      await user.save();
+
+      // Handle JsonWebToken
       const payload = {
         user: {
           id: user.id
@@ -73,7 +77,6 @@ router.post(
           res.json({ token });
         }
       );
-      await user.save();
 
       // Return json web token (jsonwebtoken)
     } catch (err) {
