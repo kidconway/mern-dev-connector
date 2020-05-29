@@ -15,7 +15,7 @@ const User = require("../../models/User");
 router.post(
   "/",
   [
-    check("name", "NAme is required")
+    check("name", "Name is required")
       .not()
       .isEmpty(),
     check("email", "Please include a valid email").isEmail(),
@@ -77,14 +77,11 @@ router.post(
           res.json({ token });
         }
       );
-
       // Return json web token (jsonwebtoken)
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
     }
-
-    res.send("User route");
   }
 );
 
